@@ -14,7 +14,6 @@ Middleware::Middleware(std::condition_variable & produce, std::condition_variabl
 
 void Middleware::addTask(Task task, bool isFinished)
 {
-//    std::unique_lock lck(m_);
     tasks_.push(task);
     isFinished_ = isFinished;
 
@@ -23,7 +22,6 @@ void Middleware::addTask(Task task, bool isFinished)
 
 Middleware::Task Middleware::popTask()
 {
-//    std::unique_lock lck(m_);
     auto task = tasks_.front();
     tasks_.pop();
     notifyProducer();
@@ -32,12 +30,12 @@ Middleware::Task Middleware::popTask()
 
 void Middleware::notifyProducer()
 {
-    goProduce_.notify_one();
+    goProduce_.notify_all();
 }
 
 void Middleware::notifyConsumer()
 {
-    goConsume_.notify_one();
+    goConsume_.notify_all();
 }
 
 std::condition_variable &Middleware::getGoProduce()

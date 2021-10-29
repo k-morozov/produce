@@ -16,6 +16,7 @@ public:
 
 private:
     MiddlewarePtr mid_;
+    std::mutex displayMutex_;
 };
 
 

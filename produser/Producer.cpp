@@ -12,7 +12,8 @@ Producer::Producer(MiddlewarePtr mid) :
 
 void Producer::run()
 {
-    for(size_t i=0; i<10; ++i)
+    constexpr size_t maxOp = 10;
+    for(size_t i=0; i<maxOp; ++i)
     {
         {
             std::unique_lock lck(mid_->getM());
@@ -27,5 +28,5 @@ void Producer::run()
     }
 
     std::unique_lock lck(mid_->getM());
-    mid_->addTask(10, true);
+    mid_->addTask(maxOp, true);
 }

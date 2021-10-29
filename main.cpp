@@ -13,11 +13,26 @@ int main() {
     std::condition_variable goConsume;
 
     auto mid = std::make_shared<Middleware>(goProduce, goConsume);
-    Producer producer(mid);
     Consumer consumer(mid);
 
-    auto future = std::async(std::launch::async, [&consumer](){ consumer.run(); });
-    producer.run();
+    auto firstConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
+    auto secondConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
+    auto thirdConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
+    auto fourthConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
+    auto fiveConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
+
+    auto firstProducer = std::async(std::launch::async, [&mid](){
+        Producer producer(mid);
+        producer.run();
+    });
+    auto secondProducer = std::async(std::launch::async, [&mid](){
+        Producer producer(mid);
+        producer.run();
+    });
+    auto thirdProducer = std::async(std::launch::async, [&mid](){
+        Producer producer(mid);
+        producer.run();
+    });
 
     return 0;
 }
