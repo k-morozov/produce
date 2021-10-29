@@ -21,6 +21,7 @@ int main() {
     auto fourthConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
     auto fiveConsumer = std::async(std::launch::async, [&consumer](){ consumer.run(); });
 
+
     auto firstProducer = std::async(std::launch::async, [&mid](){
         Producer producer(mid);
         producer.run();
