@@ -7,6 +7,7 @@
 
 #include "Consumer.h"
 
+#include "utils/Utils.h"
 
 Consumer::Consumer(MiddlewarePtr mid) :
     mid_(std::move(mid))
@@ -26,12 +27,11 @@ void Consumer::run()
         if (!mid_->emptyTasks())
         {
             auto task = mid_->popTask();
-//            std::lock_guard l(displayMutex_);
-            std::cout << "thread:" << id << ", task: " << task << std::endl;
+
+            detail::pcout() << "thread:" << id << ", task: " << task << std::endl;
             taskCounter++;
         }
 
     }
-    std::lock_guard l(displayMutex_);
-    std::cout << "thread:" << id << " is done, counter = " << taskCounter << std::endl;
+    detail::pcout() << "thread:" << id << " is done, counter = " << taskCounter << std::endl;
 }

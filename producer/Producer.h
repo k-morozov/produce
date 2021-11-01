@@ -8,7 +8,8 @@
 #include <thread>
 #include <queue>
 #include <vector>
-#include "../middleware/Middleware.h"
+
+#include "middleware/Middleware.h"
 
 
 class Producer {

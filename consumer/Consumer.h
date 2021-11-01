@@ -5,7 +5,7 @@
 #ifndef PRODUCE_CONSUMER_H
 #define PRODUCE_CONSUMER_H
 
-#include "../middleware/Middleware.h"
+#include "middleware/Middleware.h"
 
 
 class Consumer {
@@ -16,7 +16,6 @@ public:
 
 private:
     MiddlewarePtr mid_;
-    std::mutex displayMutex_;
 };
 
 
